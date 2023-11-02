@@ -1,6 +1,9 @@
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
 import HashMap "mo:base/HashMap";
+import Array "mo:base/Array";
+import Nat "mo:base/Nat";
+import Debug "mo:base/Debug";
 
 
 actor Token{
@@ -19,5 +22,39 @@ actor Token{
       };
 
       return balance;
+    };
+    
+    public query func getSymbol() : async Text {
+      return symbol;
+    };
+
+    public shared(msg) func payOut() : async Text {
+      Debug.print(debug_show(msg.caller));
+
+      if (balances.get(msg.caller) == null) {
+        let amount = 10000;
+        balances.put(msg.caller, amount);
+        return "Success";
+      }else {
+        return "Already Clamied"
+      }     
+    };
+
+    public shared(msg) func transfer(to: Principal, amount: Nat) : async Text {
+      let formBalance = await balanceOf(msg.caller);
+      if (formBalance > amount) {
+        let newFromBalance : Nat = formBalance - amount;
+        balances.put(msg.caller, newFromBalance);
+
+        let toBalance = await balanceOf(to);
+        let newToBalance = toBalance + amount;
+        balances.put(to, newToBalance);
+        return "Success";
+      }else {
+        return "Insufficient Funds"
+      }
     }
+
+
+
 };
