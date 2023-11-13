@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Principal } from "@dfinity/principal";
-import { token } from "../../src/declarations/token/index.js"
 import { AuthClient } from "@dfinity/auth-client"
 import { canisterId, createActor, token } from "../../src/declarations/token/index.js"
 
