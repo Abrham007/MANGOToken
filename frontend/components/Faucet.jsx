@@ -31,7 +31,7 @@ function Faucet(props) {
         </span>
         Faucet
       </h2>
-      <label>Get your free DAngela tokens here! Claim 10,000 DANG coins to your {props.userPrincipal}.</label>
+      <label>Get your free MANGO tokens here! Claim 10,000 MANGO coins to your {props.userPrincipal} Account.</label>
       <p className="trade-buttons">
         <button id="btn-payout" onClick={handleClick} disabled={isDisabled}>
           {buttonText}
