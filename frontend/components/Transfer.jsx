@@ -16,16 +16,22 @@ function Transfer() {
     setDisable(true);
     const recipient = Principal.fromText(recipientId);
     const amountToTransfer = Number(amount);
-    const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
 
-    const authenticatedCanister = createActor(canisterId, {
-      agentOptions: {
-        identity,
-      }
-    })
+    // for --network deployment
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
 
-    const result = await authenticatedCanister.transfer(recipient, amountToTransfer)
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   }
+    // })
+
+    // const result = await authenticatedCanister.transfer(recipient, amountToTransfer)
+
+    // for local development 
+    const result = await token.transfer(recipient, amountToTransfer)
+
     setFeedback(result);
     setHidden(false);
     setDisable(false);

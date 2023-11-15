@@ -10,16 +10,21 @@ function Faucet(props) {
   async function handleClick(event) {
     setDisable(true);
 
-    const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    // when online to the network other wise 403 error
 
-    const authenticatedCanister = createActor(canisterId, {
-      agentOptions: {
-        identity,
-      }
-    })
+    // const authClient = await AuthClient.create();
+    // const identity = await authClient.getIdentity();
 
-    const result = await authenticatedCanister.payOut();
+    // const authenticatedCanister = createActor(canisterId, {
+    //   agentOptions: {
+    //     identity,
+    //   }
+    // })
+
+    // const result = await authenticatedCanister.payOut();
+
+    // for local development
+    const result = await token.payOut();
     setText(result);
   }
 
