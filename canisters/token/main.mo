@@ -12,6 +12,7 @@ actor Token{
     let owner: Principal = Principal.fromText("ftys7-iyo3k-m5mlc-7fwdz-doewh-ifbwj-eioyy-onisv-vf6s4-ngmeu-sae");
     let totalSupply: Nat = 1000000000;
     let symbol: Text = "MANGO";
+    
 
     private stable var balanceEntries: [(Principal, Nat)] = [];
     private var balances = HashMap.HashMap<Principal, Nat>(1, Principal.equal, Principal.hash);
@@ -68,7 +69,7 @@ actor Token{
 
     system func postupgrade() {
       balances := HashMap.fromIter<Principal, Nat>(balanceEntries.vals(), 1, Principal.equal, Principal.hash);
-
+      
       if (balances.size() < 1) {
         balances.put(owner, totalSupply);
       }
